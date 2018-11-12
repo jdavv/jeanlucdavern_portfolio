@@ -1,0 +1,5 @@
+[run]
+include = jeanlucdavern_portfolio/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
