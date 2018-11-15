@@ -1,0 +1,121 @@
+---
+- hosts: jeanlucdavern.com
+  vars:
+  user: ubuntu
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Apt upgrade
+    apt: upgrade=dist update_cache=yes
+
+  - name: Install OS level dependencies
+    apt:
+      update_cache: yes
+      name: "{{ packages }}"
+    vars:
+        packages:
+        - git
+        - python-setuptools
+        - python3
+        - python3-venv
+        - python3-dev
+        - libpq-dev
+        - build-essential
+        - gettext
+        - zlib1g-dev
+        - libtiff5-dev
+        - libjpeg8-dev
+        - libfreetype6-dev
+        - liblcms2-dev
+        - libwebp-dev
+        - graphviz-dev
+        - software-properties-common
+
+  - name: Create site directory
+    file: path=/home/ubuntu/{{ domain_name }} state=directory
+
+  - name: Git source code
+    git:
+      repo: 'https://github.com/jdavv/jeanlucdavern_portfolio.git'
+      dest: /home/ubuntu/{{ domain_name }}
+
+  - name: Create app venv
+    shell: python3 -m venv /home/ubuntu/{{ domain_name }}/virtualenv
+
+  - name: PIP install requirements
+    pip:
+      requirements: /home/ubuntu/{{ domain_name }}/requirements/production.txt
+      virtualenv: /home/ubuntu/{{ domain_name }}/virtualenv
+      virtualenv_python: 3.6.6
+
+  - name: Copy .env file over
+    copy:
+      src: "{{ env_file }}"
+      dest: /home/ubuntu/{{ domain_name }}/.env
+      owner: ubuntu
+      group: ubuntu
+      mode: 0644
+
+  - name: Install nginx
+    become: True
+    become_method: sudo
+    apt:
+      name: nginx
+      state: present
+
+  - name: Remove nginx default site
+    file: name=/etc/nginx/sites-enabled/default state=absent
+
+  - name: make {{ domain_name }} available to nginx
+    template:
+      src: templates/portfolio-http.j2
+      dest: /etc/nginx/sites-available/{{ domain_name }}
+
+  - name: Symlink {{ domain_name }} sites-available to sites-enabled
+    file:
+      src: /etc/nginx/sites-available/{{ domain_name }}
+      path: /etc/nginx/sites-enabled/{{ domain_name }}
+      owner: ubuntu
+      group: ubuntu
+      state: link
+
+  - name: Create systemd unit for gunicorn
+    template:
+      src: templates/gunicorn.service
+      dest: /etc/systemd/system/gunicorn-{{ domain_name }}.service
+
+  - name: daemon-reload
+    systemd: daemon_reload=yes
+
+  - name: Install certbot repo
+    become: True
+    become_method: sudo
+    shell: add-apt-repository ppa:certbot/certbot -y
+
+  - name: Install certbot
+    become: True
+    become_method: sudo
+    apt:
+      update_cache: yes
+      name: python-certbot-nginx
+      state: present
+
+  - name: Certbot configure nginx for ssl
+    become: True
+    become_method: sudo
+    shell: certbot --nginx --noninteractive --agree-tos --email contact@jeanlucdavern.com -d {{ domain_name }}
+
+  - name: Start nginx
+    service:
+      name: nginx
+      enabled: yes
+      state: reloaded
+
+  - name: Restart gunicorn
+    service:
+      name: gunicorn-{{ domain_name }}
+      enabled: yes
+      state: restarted
+
+  - name: Reboot machine
+    reboot:

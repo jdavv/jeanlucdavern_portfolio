@@ -1,0 +1,9 @@
+server {
+   listen 80;
+   server_name staging-portfolio.jeanlucdavern.com;
+
+   location / {
+	include proxy_params;
+	proxy_pass http://unix:/home/ubuntu/staging-portfolio.jeanlucdavern.com.socket;
+   }
+}
