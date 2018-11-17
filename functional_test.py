@@ -13,7 +13,7 @@ class TestSiteTitle:
         chrome_options = Options()
         chrome_options.add_experimental_option("mobileEmulation",
                                                mobile_emulation)
-        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(options=chrome_options)
 
         yield self.driver
 
