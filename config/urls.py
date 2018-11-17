@@ -21,6 +21,10 @@ urlpatterns = [
     ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path(
+        "projects/",
+        include("jeanlucdavern_portfolio.projects.urls", namespace="projects"),
+    ),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
