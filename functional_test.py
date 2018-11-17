@@ -4,8 +4,10 @@ from selenium.webdriver.chrome.options import Options
 import pytest
 
 
-class TestNewVisitor:
-    def setup_method(self):
+class TestSiteTitle:
+    
+    @pytest.fixture
+    def driver_setup(self):
 
         mobile_emulation = {"deviceName": "iPhone 6/7/8 Plus"}
         chrome_options = Options()
@@ -13,9 +15,10 @@ class TestNewVisitor:
                                                mobile_emulation)
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
 
-    def teardown_method(self):
+        yield self.driver
+
         self.driver.quit()
 
-    def test_site_is_reachable(self):
+    def test_site_is_reachable(self, driver_setup):
         self.driver.get('http://127.0.0.1:8000')
         assert 'jeanlucdavern.com' == self.driver.title

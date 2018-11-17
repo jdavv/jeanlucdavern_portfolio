@@ -22,7 +22,8 @@
     
 
     <!-- Your stuff: Third-party CSS libraries go here -->
-    
+	 	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Permanent+Marker|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- This file stores project-specific CSS -->
     
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
@@ -32,17 +33,17 @@
 
   </head>
 
-  <body>
+  <body class="mb-5">
 
     <div class="m-b-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">jeanlucdavern.com</a>
+      <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-port-colors">
+        <a class="navbar-brand" href="{% url 'home' %}">💬 jeanluc</a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span><i class="material-icons">fastfood</i></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -74,7 +75,6 @@
 
     </div>
 
-    <div class="container">
 
       {% if messages %}
           {% for message in messages %}
@@ -83,7 +83,6 @@
       {% endif %}
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
 
     </div> <!-- /container -->
