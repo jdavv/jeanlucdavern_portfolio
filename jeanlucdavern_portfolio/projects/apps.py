@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
 
-class ProjectsConfig(AppConfig):
-    name = 'projects'
+class ProjectsAppConfig(AppConfig):
+    name = 'jeanlucdavern_portfolio.projects'
+    verbose_name = 'Users'
