@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'jeanlucdavern_portfolio.users.apps.UsersAppConfig',
+    'jeanlucdavern_portfolio.projects'
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
