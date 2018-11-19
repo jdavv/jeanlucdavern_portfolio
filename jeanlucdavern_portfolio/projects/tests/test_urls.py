@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import reverse, resolve
 
 
-def test_list():
-    assert reverse("projects:index") == "/projects/"
-    assert resolve("/projects/").view_name == "projects:index"
+class TestUrls:
+
+    def test_project_root(self):
+        assert reverse("projects:list") == "/projects/"
+        assert resolve("/projects/").view_name == "projects:list"
