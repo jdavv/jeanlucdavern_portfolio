@@ -1,6 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Project
 
 
-def index(request):
-    pass
+class ProjectsListView(ListView):
+    model = Project
+
+
+class ProjectDetailView(DetailView):
+    model = Project
