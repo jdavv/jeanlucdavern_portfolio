@@ -7,15 +7,15 @@ from jeanlucdavern_portfolio.projects.views import ProjectDetailView, ProjectsLi
 
 
 @pytest.mark.django_db
-class TestViews:
-    def test_project_detail(self):
+class TestProjectViews:
+    def test_project_detail_view(self):
         proj = mixer.blend('projects.Project')
         path = reverse('projects:detail', kwargs={'slug': proj.slug})
         request = RequestFactory().get(path)
         response = ProjectDetailView.as_view()(request, slug=proj.slug)
         assert response.status_code == 200, 'Should be status code 200'
 
-    def test_project_list(self):
+    def test_project_list_view(self):
         path = reverse('projects:list')
         request = RequestFactory().get(path)
         response = ProjectsListView.as_view()(request)
