@@ -7,6 +7,9 @@ class Project(models.Model):
     description = models.CharField(max_length=128)
     repo = models.URLField()
     slug = models.SlugField()
+    image = models.ImageField(
+            upload_to='project_images',
+            default='project_images/default_project.png')
 
     def __str__(self):
         return self.title
@@ -14,4 +17,7 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Project, self).save(*args, **kwargs)
-            
+
+
+class Technologies(models.Model):
+    name = models.CharField(max_length=64)
