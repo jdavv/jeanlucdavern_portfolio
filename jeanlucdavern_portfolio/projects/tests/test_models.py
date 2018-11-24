@@ -27,7 +27,7 @@ class TestTechnologiesModel:
 
     def test_technology_name_gets_slugified(self):
         tech = mixer.blend('projects.Technologies')
-        assert tech.slug == slugify(tech.title), 'Slug should pre-populate from title'
+        assert tech.slug == slugify(tech.name), 'Slug should pre-populate from name'
 
 
 class TestManyToManyModelRelation:
