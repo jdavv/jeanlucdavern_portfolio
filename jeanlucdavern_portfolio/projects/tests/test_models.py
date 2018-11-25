@@ -19,6 +19,10 @@ class TestProjectsModel:
         proj = mixer.blend('projects.Project')
         assert proj.slug == slugify(proj.title), 'Slug should pre-populate from title'
 
+    def test_get_absolute_url(self):
+        proj = mixer.blend('projects.Project')
+        assert proj.get_absolute_url() == f'/projects/{proj.slug}', 'Should fail if urlconf is not defined correctly'
+
 
 class TestTechnologiesModel:
     def test_can_create_technology_object(self):
@@ -28,6 +32,10 @@ class TestTechnologiesModel:
     def test_technology_name_gets_slugified(self):
         tech = mixer.blend('projects.Technologies')
         assert tech.slug == slugify(tech.name), 'Slug should pre-populate from name'
+
+    def test_str_is_slug(self):
+        tech = mixer.blend('projects.Technologies')
+        assert str(tech) == slugify(tech.name), '__str__ should pre-populate from name'
 
 
 class TestManyToManyModelRelation:
