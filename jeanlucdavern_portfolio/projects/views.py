@@ -11,9 +11,9 @@ class ProjectDetailView(DetailView):
     model = Project
 
 
-class ProjectsUsingTheseTechnologiesListView(ListView):
+class ProjectsUsingTheseKeywordsListView(ListView):
     model = Project
     allow_empty = False  # If list is empty 404
 
     def get_queryset(self):
-        return Project.objects.filter(technologies__slug=self.kwargs['slug'])
+        return Project.objects.filter(keywords__slug=self.kwargs['slug'])

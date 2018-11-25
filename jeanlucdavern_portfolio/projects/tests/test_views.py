@@ -5,7 +5,7 @@ from mixer.backend.django import mixer
 from ..models import Project
 from jeanlucdavern_portfolio.projects.views import (
     ProjectDetailView, ProjectsListView,
-    ProjectsUsingTheseTechnologiesListView)
+    ProjectsUsingTheseKeywordsListView)
 
 
 @pytest.mark.django_db
@@ -23,10 +23,10 @@ class TestProjectViews:
         self.response = ProjectsListView.as_view()(self.request)
         assert self.response.status_code == 200, 'Should be status code 200'
 
-    def test_projects_can_be_listed_by_technologies_view(self):
-        self.tech = mixer.blend('projects.Technologies')
-        self.proj = mixer.blend(Project, technologies=self.tech)
-        self.path = reverse('projects:tech_list', kwargs={'slug': self.tech.slug})
+    def test_projects_can_be_listed_by_keywords_view(self):
+        self.keywords = mixer.blend('projects.keywords')
+        self.proj = mixer.blend(Project, keywords=self.keywords)
+        self.path = reverse('projects:keywords_list', kwargs={'slug': self.keywords.slug})
         self.request = RequestFactory().get(self.path)
-        self.response = ProjectsUsingTheseTechnologiesListView.as_view()(self.request, slug=self.tech.slug)
+        self.response = ProjectsUsingTheseKeywordsListView.as_view()(self.request, slug=self.keywords.slug)
         assert self.response.status_code == 200, 'Should be status code 200'

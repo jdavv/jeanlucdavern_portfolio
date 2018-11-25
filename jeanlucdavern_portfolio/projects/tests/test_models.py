@@ -1,7 +1,8 @@
 import pytest
 from django.template.defaultfilters import slugify
 from mixer.backend.django import mixer
-from jeanlucdavern_portfolio.projects.models import Project, Technologies
+
+from jeanlucdavern_portfolio.projects.models import Project
 
 pytestmark = pytest.mark.django_db
 
@@ -24,48 +25,15 @@ class TestProjectsModel:
         assert proj.get_absolute_url() == f'/projects/{proj.slug}', 'Should fail if urlconf is not defined correctly'
 
 
-class TestTechnologiesModel:
-    def test_can_create_technology_object(self):
-        technology = mixer.blend('projects.Technologies')
-        assert technology.pk == 1, 'Should create a Technology instance'
+class TestKeywordsModel:
+    def test_can_create_keywords_object(self):
+        keyword = mixer.blend('projects.Keywords')
+        assert keyword.pk == 1, 'Should create a Keywords instance'
 
-    def test_technology_name_gets_slugified(self):
-        tech = mixer.blend('projects.Technologies')
-        assert tech.slug == slugify(tech.name), 'Slug should pre-populate from name'
+    def test_keywords_name_gets_slugified(self):
+        keyword = mixer.blend('projects.Keywords')
+        assert keyword.slug == slugify(keyword.name), 'Slug should pre-populate from name'
 
     def test_str_is_slug(self):
-        tech = mixer.blend('projects.Technologies')
-        assert str(tech) == slugify(tech.name), '__str__ should pre-populate from name'
-
-
-class TestManyToManyModelRelation:
-    @pytest.fixture
-    def setup(self):
-        # Create three projects
-        self.gungans = Project.objects.create(title='gungans')
-        self.jedi = Project.objects.create(title='jedi')
-        self.sith = Project.objects.create(title='sith')
-
-        # Create three technologies
-        self.lightsaber = Technologies.objects.create(name='lightsaber')
-        self.ship = Technologies.objects.create(name='ship')
-        self.bomba = Technologies.objects.create(name='bomba')
-
-        # All projects share a technologies
-        self.gungans.technologies.add(self.ship)
-        self.jedi.technologies.add(self.ship)
-        self.sith.technologies.add(self.ship)
-
-        # Only jedi and sith have lightsabers
-        self.jedi.technologies.add(self.lightsaber)
-        self.sith.technologies.add(self.lightsaber)
-
-    def test_project_has_technology(self, setup):
-        # test all projects have ship technology
-        has_ships = Project.objects.filter(technologies=self.ship)
-        assert list(has_ships) == [self.gungans, self.jedi, self.sith]
-
-    def test_project_does_not_have_technology(self, setup):
-        # test gungans do not have light saber
-        no_lightsabers = Project.objects.filter(technologies=self.lightsaber)
-        assert self.gungans not in list(no_lightsabers)
+        keyword = mixer.blend('projects.Keywords')
+        assert str(keyword) == slugify(keyword.name), '__str__ should pre-populate from name'

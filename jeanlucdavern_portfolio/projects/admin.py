@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Project, Technologies
+from .models import Project, Keywords
 
 
-class TechnologiesAdmin(admin.ModelAdmin):
+class KeywordsAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('name', ),
     }
@@ -15,4 +15,4 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Technologies, TechnologiesAdmin)
+admin.site.register(Keywords, KeywordsAdmin)

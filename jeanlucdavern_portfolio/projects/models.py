@@ -3,7 +3,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 
 
-class Technologies(models.Model):
+class Keywords(models.Model):
     name = models.CharField(max_length=16, unique=True)
     slug = models.SlugField()
 
@@ -12,7 +12,7 @@ class Technologies(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Technologies, self).save(*args, **kwargs)
+        super(Keywords, self).save(*args, **kwargs)
 
 
 class Project(models.Model):
@@ -23,7 +23,7 @@ class Project(models.Model):
     image = models.ImageField(
             upload_to='project_images',
             default='project_images/default_project.png')
-    technologies = models.ManyToManyField(Technologies)
+    keywords = models.ManyToManyField(Keywords)
 
     def __str__(self):
         return self.title

@@ -4,7 +4,10 @@ from . import views
 
 app_name = "projects"
 urlpatterns = [
-        path('', view=views.ProjectsListView.as_view(), name='list'),
-        path('<slug>', view=views.ProjectDetailView.as_view(), name='detail'),
-        path('tagged/<slug>', view=views.ProjectsUsingTheseTechnologiesListView.as_view(), name='tech_list'),
+    path('', view=views.ProjectsListView.as_view(), name='list'),
+    path('<slug>', view=views.ProjectDetailView.as_view(), name='detail'),
+    path(
+        'tagged/<slug>',
+        view=views.ProjectsUsingTheseKeywordsListView.as_view(),
+        name='keywords_list'),
 ]
