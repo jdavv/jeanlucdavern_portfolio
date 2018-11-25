@@ -3,7 +3,9 @@ from django.test import RequestFactory
 from django.urls import reverse
 from mixer.backend.django import mixer
 from ..models import Project
-from jeanlucdavern_portfolio.projects.views import ProjectDetailView, ProjectsListView, TechnologiesListView
+from jeanlucdavern_portfolio.projects.views import (
+    ProjectDetailView, ProjectsListView,
+    ProjectsUsingTheseTechnologiesListView)
 
 
 @pytest.mark.django_db
@@ -26,5 +28,5 @@ class TestProjectViews:
         self.proj = mixer.blend(Project, technologies=self.tech)
         self.path = reverse('projects:tech_list', kwargs={'slug': self.tech.slug})
         self.request = RequestFactory().get(self.path)
-        self.response = TechnologiesListView.as_view()(self.request, slug=self.tech.slug)
+        self.response = ProjectsUsingTheseTechnologiesListView.as_view()(self.request, slug=self.tech.slug)
         assert self.response.status_code == 200, 'Should be status code 200'

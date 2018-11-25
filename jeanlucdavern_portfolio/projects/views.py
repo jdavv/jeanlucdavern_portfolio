@@ -11,7 +11,7 @@ class ProjectDetailView(DetailView):
     model = Project
 
 
-class TechnologiesListView(ListView):
+class ProjectsUsingTheseTechnologiesListView(ListView):
     model = Project
     allow_empty = False  # If list is empty 404
 
