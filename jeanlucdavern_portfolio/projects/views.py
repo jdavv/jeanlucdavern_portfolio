@@ -1,6 +1,6 @@
-from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404
-from .models import Project, Technologies
+from django.views.generic import DetailView, ListView
+
+from .models import Project
 
 
 class ProjectsListView(ListView):
@@ -12,7 +12,8 @@ class ProjectDetailView(DetailView):
 
 
 class TechnologiesListView(ListView):
-    model = Technologies
+    model = Project
+    allow_empty = False  # If list is empty 404
 
     def get_queryset(self):
-        return Technologies.objects.filter(slug=self.request.GET.get('slug'))
+        return Project.objects.filter(technologies__slug=self.kwargs['slug'])
