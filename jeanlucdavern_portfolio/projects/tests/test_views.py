@@ -23,7 +23,7 @@ class TestProjectViews:
         self.response = ProjectsListView.as_view()(self.request)
         assert self.response.status_code == 200, 'Should be status code 200'
 
-    def test_projects_by_technologies_view(self):
+    def test_projects_can_be_listed_by_technologies_view(self):
         self.tech = mixer.blend('projects.Technologies')
         self.proj = mixer.blend(Project, technologies=self.tech)
         self.path = reverse('projects:tech_list', kwargs={'slug': self.tech.slug})
