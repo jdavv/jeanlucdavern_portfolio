@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Technologies(models.Model):
-    name = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=16, unique=True)
     slug = models.SlugField()
 
     def __str__(self):
@@ -16,8 +16,8 @@ class Technologies(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=64)
-    description = models.CharField(max_length=128)
+    title = models.CharField(max_length=60)
+    description = models.CharField(max_length=168)
     repo = models.URLField()
     slug = models.SlugField()
     image = models.ImageField(
