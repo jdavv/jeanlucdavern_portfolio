@@ -22,7 +22,7 @@ class TestProjectsModel:
 
     def test_get_absolute_url(self):
         proj = mixer.blend('projects.Project')
-        assert proj.get_absolute_url() == f'/projects/{proj.slug}', 'Should fail if urlconf is not defined correctly'
+        assert proj.get_absolute_url() == f'/projects/{proj.slug}/', 'Should fail if urlconf is not defined correctly'
 
 
 class TestKeywordsModel:

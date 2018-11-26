@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from .models import Project
+from .models import Project, Keywords
 
 
 class ProjectsListView(ListView):
@@ -17,3 +17,8 @@ class ProjectsUsingTheseKeywordsListView(ListView):
 
     def get_queryset(self):
         return Project.objects.filter(keywords__slug=self.kwargs['slug'])
+
+
+class KeywordsListView(ListView):
+    model = Keywords
+    allow_empty = False
