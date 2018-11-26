@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block content %}
+<div class="container-fluid">
+  <div class="list-group">
+    {% for keyword in keywords_list %}
+		<a href="{{ keyword.get_absolute_url }}">{{ keyword.name }}</a>
+    <hr>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
