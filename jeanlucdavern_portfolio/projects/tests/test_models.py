@@ -37,3 +37,7 @@ class TestKeywordsModel:
     def test_str_is_slug(self):
         keyword = mixer.blend('projects.Keywords')
         assert str(keyword) == slugify(keyword.name), '__str__ should pre-populate from name'
+
+    def test_get_absolute_url(self):
+        keyword = mixer.blend('projects.Keywords')
+        assert keyword.get_absolute_url() == f'/tagged/{keyword.slug}/', 'Should fail if urlconf is not defined'
