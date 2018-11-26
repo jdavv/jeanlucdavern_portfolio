@@ -40,4 +40,4 @@ class TestKeywordsModel:
 
     def test_get_absolute_url(self):
         keyword = mixer.blend('projects.Keywords')
-        assert keyword.get_absolute_url() == f'/tagged/{keyword.slug}/', 'Should fail if urlconf is not defined'
+        assert keyword.get_absolute_url() == f'/projects/tagged/{keyword.slug}/', 'Should fail if urlconf is not defined'
