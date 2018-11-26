@@ -26,7 +26,7 @@ class TestProjectViews:
     def test_projects_can_be_listed_by_keywords_view(self):
         self.keywords = mixer.blend('projects.keywords')
         self.proj = mixer.blend(Project, keywords=self.keywords)
-        self.path = reverse('projects:keywords_list', kwargs={'slug': self.keywords.slug})
+        self.path = reverse('projects:projects_with_keywords_list', kwargs={'slug': self.keywords.slug})
         self.request = RequestFactory().get(self.path)
         self.response = ProjectsUsingTheseKeywordsListView.as_view()(self.request, slug=self.keywords.slug)
         assert self.response.status_code == 200, 'Should be status code 200'

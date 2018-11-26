@@ -9,5 +9,5 @@ urlpatterns = [
     path(
         'tagged/<slug>',
         view=views.ProjectsUsingTheseKeywordsListView.as_view(),
-        name='keywords_list'),
+        name='projects_with_keywords_list'),
 ]
