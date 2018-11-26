@@ -14,6 +14,9 @@ class Keywords(models.Model):
         self.slug = slugify(self.name)
         super(Keywords, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('projects:projects_with_keywords_list', kwargs={'slug': self.slug})
+
 
 class Project(models.Model):
     title = models.CharField(max_length=60)
