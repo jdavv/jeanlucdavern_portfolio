@@ -4,6 +4,9 @@ from django.urls import reverse
 
 
 class Keywords(models.Model):
+    class Meta:
+        verbose_name_plural = 'keywords'
+
     name = models.CharField(max_length=16, unique=True)
     slug = models.SlugField()
 
