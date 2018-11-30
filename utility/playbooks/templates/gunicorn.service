@@ -10,6 +10,8 @@ EnvironmentFile=-/home/ubuntu/{{ domain_name }}/.env
 
 ExecStartPre=/home/ubuntu/{{ domain_name }}/virtualenv/bin/python manage.py collectstatic --noinput
 ExecStartPre=/home/ubuntu/{{ domain_name }}/virtualenv/bin/python manage.py migrate
+ExecStartPre=/home/ubuntu/{{ domain_name }}/virtualenv/bin/python manage.py
+migrate createsuperuser --username {{ superuserusername }} --password --{{ superuserpassword }} --noinput --email '{{ superuseremail }}'
 
 ExecStart=/home/ubuntu/{{ domain_name }}/virtualenv/bin/gunicorn \
 	--bind unix:/home/ubuntu/{{ domain_name }}.socket \
