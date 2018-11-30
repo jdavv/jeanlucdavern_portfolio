@@ -2,6 +2,13 @@
 {% load static %}
 {% block content %}
 <h1>{{ project.title }}</h1>
+{% for keyword in project.keywords.all %}
+<a href="#" id="keyword">{{ keyword.name }}</a>
+{% endfor %}
+<br>
+<a href="{{ project.repo }}">{{ project.repo }}</a>
+<br>
 {{ project.description }}
+<img src="{{ project.image.url }}">
 {% endblock content %}
 

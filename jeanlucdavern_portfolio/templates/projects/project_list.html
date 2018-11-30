@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="list-group">
     {% for project in project_list %}
-    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+    <a href="{{ project.get_absolute_url }}" id ="project_title">{{ project.title }}</a>
     <img src="{{ project.image.url }}" class="img-fluid">
     <p>{{ project.description }}</p>
     <a href="{{ project.repo }}">repo</a>
