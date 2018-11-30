@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{ project.title }}</h1>
 {% for keyword in project.keywords.all %}
-<a href="#" id="keyword">{{ keyword.name }}</a>
+<a href="{{ keyword.get_absolute_url }}" id="keyword">{{ keyword.name }}</a>
 {% endfor %}
 <br>
 <a href="{{ project.repo }}">{{ project.repo }}</a>
