@@ -106,12 +106,12 @@ class PortfolioBase():
         keywords_options = self.driver.find_elements_by_tag_name('option')
         # The admin checks if they keyword was already used before, its ifs in
         # the list they will click it if not add it.
-        for keyword in project.keywords:
-            if keyword in keywords_options:
-                self.add_option(keyword)
         for option in keywords_options:
             if option.text in project.keywords:
                 option.click()
+        for keyword in project.keywords:
+            if keyword not in [option.text for option in keywords_options]:
+                self.add_option(keyword)
         project_save = self.driver.find_element_by_name('_save')
         project_save.send_keys(Keys.ENTER)
 
