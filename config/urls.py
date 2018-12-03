@@ -25,6 +25,10 @@ urlpatterns = [
         "projects/",
         include("jeanlucdavern_portfolio.projects.urls", namespace="projects"),
     ),
+    path(
+        "contact/",
+        include("jeanlucdavern_portfolio.contact.urls", namespace="contact"),
+    ),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
