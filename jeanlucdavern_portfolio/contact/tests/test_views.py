@@ -24,4 +24,4 @@ class TestContactView:
                 'subject': 'a valid subject',
                 'message': 'a valid message'
             })
-        assert resp.status_code == 301
+        assert resp.status_code == 302
