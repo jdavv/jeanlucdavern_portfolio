@@ -2,6 +2,6 @@ from django import forms
 
 
 class EmailForm(forms.Form):
-    subject = forms.CharField
-    message = forms.CharField
-    email = forms.EmailField
+    email = forms.EmailField(required=True)
+    subject = forms.CharField(max_length=160, required=True)
+    message = forms.CharField(required=True)
