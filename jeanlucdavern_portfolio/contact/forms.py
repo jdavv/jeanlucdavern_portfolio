@@ -14,8 +14,3 @@ class EmailForm(forms.Form):
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Column('email', 'subject', 'message'), Submit('send', 'Send'))
-
-        def form_valid(self, form):
-            print(self.form.cleaned_data['email'])
-            print(self.request.POST.get['subject'])
-            return super(EmailForm, self).form_valid(form)
