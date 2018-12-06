@@ -9,13 +9,16 @@ class HomeView(MetadataMixin, TemplateView):
     description = 'jdavs baddazz site'
     template_name = 'pages/home.html'
     use_twitter = 'True'
+    twitter_card = 'player'
+    image = '/images/monkeycomputer.gif'
+    title = 'I type a lot'
 
 
 class ProjectsListView(MetadataMixin, ListView):
     model = Project
     description = (
         'A list of my projects. A mix of Python, Linux, django,' +
-        'QEMU/KVM, and AWS. Making life easy by building systems do cool things.'
+        'QEMU/KVM, and AWS. Making life easy by building systems that do cool things.'
     )
     use_twitter = 'True'
     title = 'Check out a list software and systems I designed'
