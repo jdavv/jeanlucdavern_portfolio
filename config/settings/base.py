@@ -241,3 +241,7 @@ SOCIALACCOUNT_ADAPTER = 'jeanlucdavern_portfolio.users.adapters.SocialAccountAda
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# django-meta
+# https://django-meta.readthedocs.io/en/latest/settings.html
+META_SITE_PROTOCOL = env('META_SITE_PROTOCOL')
+META_SITE_DOMAIN = env('DJANGO_ALLOWED_HOSTS')

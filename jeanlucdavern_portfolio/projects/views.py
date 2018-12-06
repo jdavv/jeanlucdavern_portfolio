@@ -10,6 +10,12 @@ class ProjectsListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+
+        context['meta'] = self.get_object().as_meta(self.request)
+        return context
+
 
 class ProjectsUsingTheseKeywordsListView(ListView):
     model = Project
