@@ -35,7 +35,8 @@ class Project(ModelMeta, models.Model):
     _metadata = {
         'title': 'title',
         'description': 'description',
-        'image': 'get_meta_image'
+        'image': 'get_meta_image',
+        'use_twitter': 'True',
     }
 
     def get_meta_image(self):
