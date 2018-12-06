@@ -19,6 +19,7 @@ class ProjectsListView(MetadataMixin, ListView):
     )
     use_twitter = 'True'
     image = '/images/monkeycomputer.gif'
+    twitter_card = 'summary'
 
 
 class ProjectDetailView(DetailView):
