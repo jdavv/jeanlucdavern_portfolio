@@ -18,6 +18,7 @@ class ProjectsListView(MetadataMixin, ListView):
         'QEMU/KVM, and AWS. Making life easy by building systems do cool things.'
     )
     use_twitter = 'True'
+    title = 'Check out a list software and systems I designed'
     image = '/images/monkeycomputer.gif'
     twitter_card = 'summary'
 
