@@ -68,6 +68,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'meta',
 ]
 LOCAL_APPS = [
     'jeanlucdavern_portfolio.users.apps.UsersAppConfig',
