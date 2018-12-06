@@ -1,10 +1,25 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from .models import Project, Keywords
 
+from meta.views import MetadataMixin
 
-class ProjectsListView(ListView):
+
+class HomeView(MetadataMixin, TemplateView):
+    description = 'jdavs baddazz site'
+    template_name = 'pages/home.html'
+    use_twitter = 'True'
+
+
+class ProjectsListView(MetadataMixin, ListView):
     model = Project
+    description = '''
+    A list of my projects.
+    A mix of Python, Linux, django, QEMU/KVM, and AWS.
+    Making life easy by building systems do cool things.
+    '''
+    use_twitter = 'True'
+    image = '/images/monkeycomputer.gif'
 
 
 class ProjectDetailView(DetailView):
