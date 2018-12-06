@@ -276,11 +276,12 @@ tags
 pyvenv.cfg
 pip-selfcheck.json
 .env
+.env*
 
 
 ### Project template
 
-MailHog
+MailHog*
 jeanlucdavern_portfolio/media/
 
 .pytest_cache/
