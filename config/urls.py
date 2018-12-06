@@ -4,11 +4,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from jeanlucdavern_portfolio.projects import views
 
 urlpatterns = [
+    # path(
+        # "", TemplateView.as_view(template_name="pages/home.html"),
+        # name="home"),
     path(
-        "", TemplateView.as_view(template_name="pages/home.html"),
-        name="home"),
+        "", views.HomeView.as_view(), name="home",),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
