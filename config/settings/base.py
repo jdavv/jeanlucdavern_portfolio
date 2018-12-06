@@ -245,3 +245,6 @@ SOCIALACCOUNT_ADAPTER = 'jeanlucdavern_portfolio.users.adapters.SocialAccountAda
 # https://django-meta.readthedocs.io/en/latest/settings.html
 META_SITE_PROTOCOL = env('META_SITE_PROTOCOL')
 META_SITE_DOMAIN = env('DJANGO_ALLOWED_HOSTS')
+META_SITE_NAME = env('META_SITE_NAME')
+META_USE_OG_PROPERTIES = env('META_USE_OG_PROPERTIES')
+META_USE_TWITTER_PROPERTIES = env('META_USE_TWITTER_PROPERTIES')
