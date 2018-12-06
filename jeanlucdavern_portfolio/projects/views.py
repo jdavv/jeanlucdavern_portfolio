@@ -10,12 +10,14 @@ class HomeView(MetadataMixin, TemplateView):
     template_name = 'pages/home.html'
     use_twitter = 'True'
     twitter_card = 'player'
-    image = 'https://media.giphy.com/media/onozNDEOoj3nW/giphy.gif'
+    image = 'https://i.giphy.com/media/onozNDEOoj3nW/giphy-facebook_s.jpg'
     title = 'I type a lot'
     extra_props = {
         'twitter:player:width': '320',
         'twitter:player:height': '180',
-        'twitter:player:stream': 'https://media.giphy.com/media/onozNDEOoj3nW/giphy.gif'
+        'twitter:player:stream': 'https://giphy.com/embed/onozNDEOoj3nW/twitter/iframe',
+        'twitter:site': '@jdavvadj'
+
     }
 
 
