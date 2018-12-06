@@ -13,11 +13,10 @@ class HomeView(MetadataMixin, TemplateView):
 
 class ProjectsListView(MetadataMixin, ListView):
     model = Project
-    description = '''
-    A list of my projects.
-    A mix of Python, Linux, django, QEMU/KVM, and AWS.
-    Making life easy by building systems do cool things.
-    '''
+    description = (
+        'A list of my projects. A mix of Python, Linux, django,' +
+        'QEMU/KVM, and AWS. Making life easy by building systems do cool things.'
+    )
     use_twitter = 'True'
     image = '/images/monkeycomputer.gif'
 
