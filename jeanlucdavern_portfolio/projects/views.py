@@ -6,30 +6,25 @@ from meta.views import MetadataMixin
 
 
 class HomeView(MetadataMixin, TemplateView):
-    description = 'jdavs baddazz site'
     template_name = 'pages/home.html'
-    use_twitter = 'True'
-    twitter_card = 'player'
-    image = 'https://i.giphy.com/media/onozNDEOoj3nW/giphy-facebook_s.jpg'
-    title = 'I type a lot'
-    extra_props = {
-        'twitter:player:width': '320',
-        'twitter:player:height': '180',
-        'twitter:player:stream': 'https://giphy.com/embed/onozNDEOoj3nW/twitter/iframe',
-        'twitter:site': '@jdavvadj'
 
-    }
+    # html meta tags
+    description = 'Hi my name is Jean-Luc Davern. I like to solve problems using computers'
+    title = 'Jean-Luc Davern\'s Portfolio'
+    use_twitter = 'True'
+    twitter_card = 'summary'
 
 
 class ProjectsListView(MetadataMixin, ListView):
     model = Project
+
+    # html meta tags
+    title = 'Check out a list software and systems I designed'
     description = (
         'A list of my projects. A mix of Python, Linux, django,' +
         'QEMU/KVM, and AWS. Making life easy by building systems that do cool things.'
     )
     use_twitter = 'True'
-    title = 'Check out a list software and systems I designed'
-    image = '/images/monkeycomputer.gif'
     twitter_card = 'summary'
 
 
@@ -54,3 +49,8 @@ class ProjectsUsingTheseKeywordsListView(ListView):
 class KeywordsListView(ListView):
     model = Keywords
     allow_empty = False
+
+    # html meta tags
+    description = 'Find projects that have been tagged with a specific technology'
+    title = 'Projects tagged by keyword'
+    twitter_card = 'summary'
