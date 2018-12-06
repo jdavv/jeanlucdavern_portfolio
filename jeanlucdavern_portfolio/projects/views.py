@@ -19,7 +19,7 @@ class ProjectsListView(MetadataMixin, ListView):
     model = Project
 
     # html meta tags
-    title = 'Check out a list software and systems I designed'
+    title = 'A list of software and systems I designed'
     description = (
         'A list of my projects. A mix of Python, Linux, django,' +
         'QEMU/KVM, and AWS. Making life easy by building systems that do cool things.'
