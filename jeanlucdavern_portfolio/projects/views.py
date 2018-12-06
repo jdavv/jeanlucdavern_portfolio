@@ -9,8 +9,8 @@ class HomeView(MetadataMixin, TemplateView):
     template_name = 'pages/home.html'
 
     # html meta tags
-    description = 'Hi my name is Jean-Luc Davern. I like to solve problems using computers'
-    title = 'Jean-Luc Davern\'s Portfolio'
+    title = 'Jean-Luc Davern'
+    description = 'Devloper, administrator, trouble-shooter, and problem solver'
     use_twitter = 'True'
     twitter_card = 'summary'
 
@@ -21,7 +21,7 @@ class ProjectsListView(MetadataMixin, ListView):
     # html meta tags
     title = 'A list of software and systems I designed'
     description = (
-        'A list of my projects. A mix of Python, Linux, django,' +
+        'Mix of Python, Linux, django,' +
         'QEMU/KVM, and AWS. Making life easy by building systems that do cool things.'
     )
     use_twitter = 'True'
