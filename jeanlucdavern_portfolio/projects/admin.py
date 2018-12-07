@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Keywords
+from .models import About, Project, Keywords
 
 
 class KeywordsAdmin(admin.ModelAdmin):
@@ -14,5 +14,10 @@ class ProjectAdmin(admin.ModelAdmin):
     }
 
 
+class AboutAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(About, AboutAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Keywords, KeywordsAdmin)
