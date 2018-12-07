@@ -1,6 +1,8 @@
 from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import Project, Keywords
+from django.shortcuts import get_object_or_404
+
+from .models import Project, Keywords, About
 
 from meta.views import MetadataMixin
 
@@ -14,21 +16,24 @@ class HomeView(MetadataMixin, ListView):
     use_twitter = 'True'
     twitter_card = 'summary'
     object_type = 'website'
-    imgage = 'https://s3.amazonaws.com/portfoliostatic1/media/monkeycomputer.gif'
+    image = 'https://s3.amazonaws.com/portfoliostatic1/media/monkeycomputer.gif'
 
     def get_queryset(self):
         return Project.objects.filter(displayed_on_home_page=True)
 
 
-class AboutView(MetadataMixin, TemplateView):
-    template_name = 'pages/about.html'
+class AboutView(DetailView):
+    model = About
 
-    # html meta tags
-    title = 'Jean-Luc Davern'
-    description = 'Devloper, administrator, trouble-shooter, and problem solver.'
-    use_twitter = 'True'
-    twitter_card = 'summary'
-    object_type = 'website'
+    def get_object(self):
+        if 'pk' not in self.kwargs:
+            return get_object_or_404(About, displayed_on_about_page=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+
+        context['meta'] = self.get_object().as_meta(self.request)
+        return context
 
 
 class ProjectsListView(MetadataMixin, ListView):
