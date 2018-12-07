@@ -5,8 +5,8 @@ from .models import Project, Keywords
 from meta.views import MetadataMixin
 
 
-class HomeView(MetadataMixin, TemplateView):
-    template_name = 'pages/home.html'
+class HomeView(MetadataMixin, ListView):
+    model = Project
 
     # html meta tags
     title = 'Jean-Luc Davern'
@@ -14,6 +14,10 @@ class HomeView(MetadataMixin, TemplateView):
     use_twitter = 'True'
     twitter_card = 'summary'
     object_type = 'website'
+    imgage = 'https://s3.amazonaws.com/portfoliostatic1/media/monkeycomputer.gif'
+
+    def get_queryset(self):
+        return Project.objects.filter(displayed_on_home_page=True)
 
 
 class AboutView(MetadataMixin, TemplateView):
