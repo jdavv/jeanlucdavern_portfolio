@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>{{ about.title }}</h1>
+{{ about.text|safe }}
+{% endblock content %}
+
