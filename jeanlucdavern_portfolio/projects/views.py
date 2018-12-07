@@ -13,6 +13,7 @@ class HomeView(MetadataMixin, TemplateView):
     description = 'Devloper, administrator, trouble-shooter, and problem solver.'
     use_twitter = 'True'
     twitter_card = 'summary'
+    object_type = 'website'
 
 
 class AboutView(MetadataMixin, TemplateView):
@@ -23,6 +24,7 @@ class AboutView(MetadataMixin, TemplateView):
     description = 'Devloper, administrator, trouble-shooter, and problem solver.'
     use_twitter = 'True'
     twitter_card = 'summary'
+    object_type = 'website'
 
 
 class ProjectsListView(MetadataMixin, ListView):
@@ -36,6 +38,7 @@ class ProjectsListView(MetadataMixin, ListView):
     )
     use_twitter = 'True'
     twitter_card = 'summary'
+    object_type = 'website'
 
 
 class ProjectDetailView(DetailView):
@@ -64,3 +67,5 @@ class KeywordsListView(ListView):
     description = 'Find projects that have been tagged with a specific technology'
     title = 'Projects tagged by keyword'
     twitter_card = 'summary'
+    use_facebook = 'True'
+    object_type = 'website'
