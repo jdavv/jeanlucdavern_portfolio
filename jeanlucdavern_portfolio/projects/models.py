@@ -53,3 +53,28 @@ class Project(ModelMeta, models.Model):
 
     def get_absolute_url(self):
         return reverse("projects:detail", kwargs={"slug": self.slug})
+
+
+class About(ModelMeta, models.Model):
+    title = models.CharField(max_length=60)
+    text = models.TextField(blank=False)
+    image = models.ImageField(upload_to='meta_images')
+    meta_description = models.CharField(max_length=160)
+    displayed_on_about_page = models.BooleanField(default=False)
+
+    _metadata = {
+       'title': 'title',
+       'description': 'meta_description',
+       'url': 'get_absolute_url',
+       'image': 'get_meta_image'
+    }
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('about')
+
+    def get_meta_image(self):
+        if self.image:
+            return self.image.url
