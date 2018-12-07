@@ -31,6 +31,7 @@ class Project(ModelMeta, models.Model):
             upload_to='project_images',
             default='project_images/default_project.png')
     keywords = models.ManyToManyField(Keywords)
+    displayed_on_home_page = models.BooleanField(default=False)
 
     _metadata = {
         'title': 'title',
