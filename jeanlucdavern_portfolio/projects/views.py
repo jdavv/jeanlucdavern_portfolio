@@ -15,6 +15,16 @@ class HomeView(MetadataMixin, TemplateView):
     twitter_card = 'summary'
 
 
+class AboutView(MetadataMixin, TemplateView):
+    template_name = 'pages/about.html'
+
+    # html meta tags
+    title = 'Jean-Luc Davern'
+    description = 'Devloper, administrator, trouble-shooter, and problem solver.'
+    use_twitter = 'True'
+    twitter_card = 'summary'
+
+
 class ProjectsListView(MetadataMixin, ListView):
     model = Project
 
