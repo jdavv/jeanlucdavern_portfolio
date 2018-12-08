@@ -1,8 +1,8 @@
 from django.views.generic import DetailView, ListView, TemplateView
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, resolve_url
 
-from .models import Project, Keywords, About
+from .models import Project, Keywords, About, SharingMeta
 
 from meta.views import MetadataMixin
 
@@ -10,16 +10,14 @@ from meta.views import MetadataMixin
 class HomeView(MetadataMixin, ListView):
     model = Project
 
-    # html meta tags
-    title = 'Jean-Luc Davern'
-    description = 'Devloper, administrator, trouble-shooter, and problem solver.'
-    use_twitter = 'True'
-    twitter_card = 'summary'
-    object_type = 'website'
-    image = 'https://s3.amazonaws.com/portfoliostatic1/media/monkeycomputer.gif'
-
     def get_queryset(self):
         return Project.objects.filter(displayed_on_home_page=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['meta'] = get_object_or_404(
+            SharingMeta, display=True, url=resolve_url('/')).as_meta(self.request)
+        return context
 
 
 class AboutView(DetailView):
@@ -27,27 +25,24 @@ class AboutView(DetailView):
 
     def get_object(self):
         if 'pk' not in self.kwargs:
-            return get_object_or_404(About, displayed_on_about_page=True)
+            return get_object_or_404(About, display=True,)
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
-
-        context['meta'] = self.get_object().as_meta(self.request)
+        context['meta'] = get_object_or_404(
+            SharingMeta, display=True, url=resolve_url('about')).as_meta(self.request)
         return context
 
 
 class ProjectsListView(MetadataMixin, ListView):
     model = Project
 
-    # html meta tags
-    title = 'Software and systems I designed'
-    description = (
-        'Mix of Python, Linux, django,' +
-        'QEMU/KVM, and AWS. Making life easy by building systems that do cool things.'
-    )
-    use_twitter = 'True'
-    twitter_card = 'summary'
-    object_type = 'website'
+    def get_context_data(self, **kwargs):
+        context = super(ProjectsListView, self).get_context_data(**kwargs)
+        context['meta'] = get_object_or_404(
+            SharingMeta, display=True,
+            url=resolve_url('/projects/')).as_meta(self.request)
+        return context
 
 
 class ProjectDetailView(DetailView):
