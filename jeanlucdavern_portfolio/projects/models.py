@@ -38,6 +38,7 @@ class Project(ModelMeta, models.Model):
         'description': 'description',
         'image': 'get_meta_image',
         'use_twitter': 'True',
+        'url': 'get_absolute_url'
     }
 
     def get_meta_image(self):
@@ -55,25 +56,31 @@ class Project(ModelMeta, models.Model):
         return reverse("projects:detail", kwargs={"slug": self.slug})
 
 
-class About(ModelMeta, models.Model):
+class About(models.Model):
     title = models.CharField(max_length=60)
     text = models.TextField(blank=False)
-    image = models.ImageField(upload_to='meta_images')
-    meta_description = models.CharField(max_length=160)
-    displayed_on_about_page = models.BooleanField(default=False)
-
-    _metadata = {
-       'title': 'title',
-       'description': 'meta_description',
-       'url': 'get_absolute_url',
-       'image': 'get_meta_image'
-    }
+    display = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('about')
+
+class SharingMeta(ModelMeta, models.Model):
+    title = models.CharField(max_length=60)
+    image = models.ImageField(upload_to='meta_images')
+    description = models.CharField(max_length=160)
+    display = models.BooleanField(default=False)
+    url = models.CharField(max_length=12, unique=True)
+
+    _metadata = {
+       'title': 'title',
+       'description': 'description',
+       'url': 'url',
+       'image': 'get_meta_image',
+    }
+
+    def __str__(self):
+        return self.url
 
     def get_meta_image(self):
         if self.image:
