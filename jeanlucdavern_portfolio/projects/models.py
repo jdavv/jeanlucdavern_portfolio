@@ -25,7 +25,7 @@ class Keywords(models.Model):
 class Project(ModelMeta, models.Model):
     title = models.CharField(max_length=60)
     description = models.CharField(max_length=168)
-    text = models.TextField
+    text = models.TextField(blank=False)
     repo = models.URLField()
     slug = models.SlugField()
     image = models.ImageField(
