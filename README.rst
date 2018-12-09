@@ -100,7 +100,7 @@ Deployment
 ----------
 
 The following details how to deploy this application.
-[Read deployment README](https://github.com/jdavv/jeanlucdavern_portfolio/tree/master/utility/playbooks)
+.._Deploy README: utility/playbooks/README.rst
 
 
 
