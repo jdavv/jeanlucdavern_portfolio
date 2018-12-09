@@ -1,7 +1,7 @@
-from jeanlucdavern_portfolio.contact.views import ContactView, SuccessView
-from django.test import RequestFactory
-from django.test import Client
 import pytest
+from django.test import Client, RequestFactory
+
+from jeanlucdavern_portfolio.contact.views import ContactView, SuccessView
 
 
 @pytest.mark.django_db
