@@ -31,6 +31,7 @@ class Project():
         self.image = choice(['/salmon.jpg', '/tuna.jpg', '/shrimp.jpg', '/deluxe.jpg'])
         self.keywords = sample(PROJECT_KEYWORDS, k=2)
         self.slug = slugify(self.title)
+        self.text = fake.text(max_nb_chars=1000)
 
 
 class PortfolioBase():
@@ -80,12 +81,15 @@ class PortfolioBase():
         self.driver.get(f'{SELENIUM_TEST_DOMAIN}/admin/projects/project/add/')
         # The admin sees a textbox for Title and types "Fat Salmon".
         title = self.driver.find_element_by_name('title')
-        time.sleep(.5)
         title.send_keys(project.title)
         # The admin sees a textbox for Description and types a description.
         description = self.driver.find_element_by_name('description')
         description.clear()
         description.send_keys(project.description)
+        # The admin sees a textbox for Text and types a description (Should
+        # allow html to be used)
+        text = self.driver.find_element_by_name('text')
+        text.send_keys(project.text)
         # The admin sees a textbox for Repo and types in the github reposistory
         # url.
         repo = self.driver.find_element_by_name('repo')
@@ -134,5 +138,4 @@ class TestAdminCreatesProjects(PortfolioBase):
 
     def test_project_detail_view(self, driver_setup, creates_project):
         self.driver.get(f'{SELENIUM_TEST_DOMAIN}/projects/{self.proj.slug}')
-        time.sleep(5)
         assert 1
