@@ -14,82 +14,80 @@ from ..models import About, Project, SharingMeta
 @pytest.mark.django_db
 class TestProjectViews:
     def test_project_detail_view(self):
-        self.proj = mixer.blend('projects.Project')
-        self.path = reverse('projects:detail', kwargs={'slug': self.proj.slug})
-        self.request = RequestFactory().get(self.path)
-        self.response = ProjectDetailView.as_view()(
-            self.request, slug=self.proj.slug)
-        assert self.response.status_code == 200, 'Should be status code 200'
+        proj = mixer.blend('projects.Project')
+        path = reverse('projects:detail', kwargs={'slug': proj.slug})
+        request = RequestFactory().get(path)
+        response = ProjectDetailView.as_view()(
+            request, slug=proj.slug)
+        assert response.status_code == 200, 'Should be status code 200'
 
     def test_project_list_view(self):
-        self.path = reverse('projects:list')
-        self.request = RequestFactory().get(self.path)
-        self.response = ProjectsListView.as_view()(self.request, meta={})
-        assert self.response.status_code == 200, 'Should be status code 200'
+        path = reverse('projects:list')
+        request = RequestFactory().get(path)
+        response = ProjectsListView.as_view()(request, meta={})
+        assert response.status_code == 200, 'Should be status code 200'
 
     def test_project_list_view_context_data(self):
-        self.proj = mixer.blend(Project)
-        self.meta = mixer.blend(SharingMeta, display=True, url='/projects/')
-        self.path = reverse('projects:list')
-        self.request = RequestFactory().get(self.path)
-        self.response = ProjectsListView.as_view()(self.request)
-        assert self.response.context_data[
-            'meta'].description == self.meta.description
+        meta = mixer.blend(SharingMeta, display=True, url='/projects/')
+        path = reverse('projects:list')
+        request = RequestFactory().get(path)
+        response = ProjectsListView.as_view()(request)
+        assert response.context_data[
+            'meta'].description == meta.description, 'Response context data should match meta attributes'
 
     def test_projects_can_be_listed_by_keywords_view(self):
-        self.keywords = mixer.blend('projects.keywords')
-        self.proj = mixer.blend(Project, keywords=self.keywords)
-        self.path = reverse(
+        keywords = mixer.blend('projects.keywords')
+        mixer.blend(Project, keywords=keywords)
+        path = reverse(
             'projects:projects_with_keywords_list',
-            kwargs={'slug': self.keywords.slug})
-        self.request = RequestFactory().get(self.path)
-        self.response = ProjectsUsingTheseKeywordsListView.as_view()(
-            self.request, slug=self.keywords.slug)
-        assert self.response.status_code == 200, 'Should be status code 200'
+            kwargs={'slug': keywords.slug})
+        request = RequestFactory().get(path)
+        response = ProjectsUsingTheseKeywordsListView.as_view()(
+            request, slug=keywords.slug)
+        assert response.status_code == 200, 'Should be status code 200'
 
     def test_about_view_no_pk_and_display_is_false(self):
-        self.about = mixer.blend(About, display=False)
-        self.path = reverse('about')
-        self.request = RequestFactory().get(self.path)
+        mixer.blend(About, display=False)
+        path = reverse('about')
+        request = RequestFactory().get(path)
         with pytest.raises(Http404):
-            self.response = AboutView.as_view()(self.request)
+            AboutView.as_view()(request), 'Should raise 404 if no About obj exist with display= True'
 
     def test_about_view_no_pk_and_display_true(self):
-        self.about = mixer.blend(About, display=True)
-        self.path = reverse('about')
-        self.request = RequestFactory().get(self.path)
-        self.response = AboutView.as_view()(self.request)
-        assert self.response.status_code == 200
+        mixer.blend(About, display=True)
+        path = reverse('about')
+        request = RequestFactory().get(path)
+        response = AboutView.as_view()(request)
+        assert response.status_code == 200, 'Should be status code 200'
 
     def test_home_about_view_context_data(self):
-        self.about = mixer.blend(About, display=True)
-        self.meta = mixer.blend(SharingMeta, display=True, url='/about/')
-        self.path = reverse('about')
-        self.request = RequestFactory().get(self.path)
-        self.response = AboutView.as_view()(self.request)
-        assert self.response.context_data[
-            'meta'].description == self.meta.description
+        mixer.blend(About, display=True)
+        meta = mixer.blend(SharingMeta, display=True, url='/about/')
+        path = reverse('about')
+        request = RequestFactory().get(path)
+        response = AboutView.as_view()(request)
+        assert response.context_data[
+            'meta'].description == meta.description, 'Response context data should match meta attributes'
 
     def test_home_view_only_displays_projects_where_displayed_is_true(self):
-        self.proj1 = mixer.blend(Project, displayed_on_home_page=True)
-        self.proj2 = mixer.blend(Project, displayed_on_home_page=False)
-        self.path = reverse('home')
-        self.request = RequestFactory().get(self.path)
-        self.response = HomeView.get_queryset(self.request)
-        assert len(self.response) == 1
+        mixer.blend(Project, displayed_on_home_page=True)
+        mixer.blend(Project, displayed_on_home_page=False)
+        path = reverse('home')
+        request = RequestFactory().get(path)
+        response = HomeView.get_queryset(request)
+        assert len(response) == 1, 'Should only display len() of Projects with displayed_on_home_page = True'
 
-    def test_home_view_where_all_projects_displayed_false(self):
-        self.proj1 = mixer.blend(Project, displayed_on_home_page=False)
-        self.path = reverse('home')
-        self.request = RequestFactory().get(self.path)
-        self.response = HomeView.as_view()(self.request)
-        assert self.response.status_code == 200, 'Page should render even when no projects are returned in the queryset'
+    def test_home_view_displays_base_even_if_no_projects_exists(self):
+        path = reverse('home')
+        request = RequestFactory().get(path)
+        response = HomeView.as_view()(request)
+        assert response.status_code == 200, 'Page should render even when no projects are returned in the queryset'
 
     def test_home_view_context_data(self):
-        self.proj = mixer.blend(Project, displayed_on_home_page=True)
-        self.meta = mixer.blend(SharingMeta, display=True, url='/')
-        self.path = reverse('home')
-        self.request = RequestFactory().get(self.path)
-        self.response = HomeView.as_view()(self.request)
-        assert self.response.context_data[
-            'meta'].description == self.meta.description
+        mixer.blend(Project, displayed_on_home_page=True)
+        meta = mixer.blend(SharingMeta, display=True, url='/')
+        path = reverse('home')
+        request = RequestFactory().get(path)
+        response = HomeView.as_view()(request)
+        assert response.context_data[
+            'meta'].description == meta.description, 'Response context data should match meta attributes'
