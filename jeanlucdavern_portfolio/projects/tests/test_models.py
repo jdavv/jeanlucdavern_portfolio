@@ -2,19 +2,14 @@ import pytest
 from django.template.defaultfilters import slugify
 from mixer.backend.django import mixer
 
-from jeanlucdavern_portfolio.projects.models import Project, About, SharingMeta
 
 pytestmark = pytest.mark.django_db
 
 
 class TestProjectsModel:
     def test_get_string_repr(self):
-        project = Project(title="this title")
-        assert str(project) == "this title"
-
-    def test_can_create_project_object(self):
-        obj = mixer.blend('projects.Project')
-        assert obj.pk == 1, 'Should create a Project instance'
+        proj = mixer.blend('projects.Project')
+        assert str(proj) == proj.title, '__str__ should == tile'
 
     def test_project_title_is_slugified(self):
         proj = mixer.blend('projects.Project')
@@ -40,16 +35,16 @@ class TestKeywordsModel:
 
     def test_get_absolute_url(self):
         keyword = mixer.blend('projects.Keywords')
-        assert keyword.get_absolute_url() == f'/projects/tagged/{keyword.slug}/', 'Should fail if urlconf is not defined'
+        assert keyword.get_absolute_url() == f'/projects/tagged/{keyword.slug}/', 'Should fail if urlconf not defined'
 
 
 class TestAboutmodel:
     def test_get_string_repr(self):
         about = mixer.blend('projects.About')
-        assert str(about) == about.title
+        assert str(about) == about.title, '__str__ should == title'
 
 
 class TestSharingMeta:
     def test_get_string_repr(self):
         meta = mixer.blend('projects.SharingMeta')
-        assert str(meta) == meta.url
+        assert str(meta) == meta.url, '__str__ should = meta.url'
