@@ -2,7 +2,7 @@ import pytest
 from django.template.defaultfilters import slugify
 from mixer.backend.django import mixer
 
-from jeanlucdavern_portfolio.projects.models import Project
+from jeanlucdavern_portfolio.projects.models import Project, About, SharingMeta
 
 pytestmark = pytest.mark.django_db
 
@@ -41,3 +41,15 @@ class TestKeywordsModel:
     def test_get_absolute_url(self):
         keyword = mixer.blend('projects.Keywords')
         assert keyword.get_absolute_url() == f'/projects/tagged/{keyword.slug}/', 'Should fail if urlconf is not defined'
+
+
+class TestAboutmodel:
+    def test_get_string_repr(self):
+        about = mixer.blend('projects.About')
+        assert str(about) == about.title
+
+
+class TestSharingMeta:
+    def test_get_string_repr(self):
+        meta = mixer.blend('projects.SharingMeta')
+        assert str(meta) == meta.url
