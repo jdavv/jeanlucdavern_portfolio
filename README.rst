@@ -98,10 +98,5 @@ Now you have your own mail server running locally, ready to receive whatever you
 
 Deployment
 ----------
-
-The following details how to deploy this application.
-.._Deploy README: utility/playbooks/README.rst
-
-
-
+Deploy to Amazon Web Services instance using ansible playbook. Uses certbot to install ssl certificates. BYODB, this instance is not running a db. See the utility/playbooks directory. 
 
