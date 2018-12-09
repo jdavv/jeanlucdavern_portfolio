@@ -127,7 +127,6 @@ class TestAdminCreatesProjects(PortfolioBase):
         self.proj = Project(PROJECT_KEYWORDS)
         self.create_project_with_admin_site(driver_setup, self.proj)
         yield self.proj
-        # assert 0, 'Should fail, Need to finish this'
 
     def test_project_is_shown_in_list_view(self, driver_setup, creates_project):
         self.driver.get(f'{SELENIUM_TEST_DOMAIN}/projects/')
