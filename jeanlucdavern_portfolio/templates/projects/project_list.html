@@ -2,11 +2,16 @@
 {% load static i18n %}
 {% block content %}
 
-<div class="container-fluid">
 		<div class="contianer-fluid mt-3">
+			{% if meta != None %}
+			<div class="mt-4 mb-4">
+				<h1>{{ meta.description }}</h1>
+			</div>
+			{% else %}
+			{% endif %}
     {% for project in project_list %}
 		<div class="mt-3">
-			<h3>{{ project.title }}</h3>
+			<h2>{{ project.title }}</h3>
 		</div>
 			<div>
 				<img src="{{ project.image.url }}" class="img-fluid rounded">
