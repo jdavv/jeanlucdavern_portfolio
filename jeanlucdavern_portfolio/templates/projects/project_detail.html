@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<div class="container-fluid">
 <h1>{{ project.title }}</h1>
-{% for keyword in project.keywords.all %}
-<a href="{{ keyword.get_absolute_url }}" id="keyword">{{ keyword.name }}</a>
-{% endfor %}
-<br>
-<a href="{{ project.repo }}">{{ project.repo }}</a>
-<br>
-{{ project.description }}
-<img src="{{ project.image.url }}">
-{% endblock content %}
 
+<img src="{{ project.image.url }}" class="img-fluid">
+
+<div class="mt-3">
+{{ project.description }}
+</div>
+
+<div class="mt-3">
+{% for keyword in project.keywords.all %}
+		<a href="{{ keyword.get_absolute_url }}" id="keyword">{{ keyword.name }}</a>
+{% endfor %}
+</div>
+<div class="mt-3">
+<a href="{{ project.repo }}">{{ project.repo }}</a>
+</div>
+
+<div class="mt-3">
+{{ project.text }}
+</div>
+
+</div>
+{% endblock content %}
