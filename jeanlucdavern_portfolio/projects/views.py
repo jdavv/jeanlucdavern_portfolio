@@ -13,6 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class HomeView(MetadataMixin, ListView):
     model = Project
+    template_name = 'projects/home_list.html'
 
     def get_queryset(self):
         return Project.objects.filter(displayed_on_home_page=True)
