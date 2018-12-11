@@ -47,10 +47,15 @@
 				</li>
 			{% endfor %}
 		</ul>
-
-		<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
-		<a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
-	</div>
+  <ul class="list-inline">
+    <li class="list-inline-item">
+      <a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
+    </li>
+    <li class="list-inline-item">
+      <a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
+    </li>
+  </ul>
+</div>
 </div><!-- END CARD -->
 {% endfor %}
 <!-- END CARD AREA -->
