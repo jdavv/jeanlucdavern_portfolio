@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block content %}
+
+<!--META DESCRIPTION -->
+
+{% if meta.description != None %}
+	<div class="row">
+		<div class="col">
+			<h1 class="my-5">{{ meta.description }}</h1>
+		</div>
+	</div>
+{% else %}
+{% endif %}
+
+
+<!-- CARD AREA -->
+<div class="row">
+<div class="card-deck">
+
+{% for project in project_list %}
+
+<div class="card border-0">
+	<img src="{{ project.image.url }}" class="card-img-top rounded" alt="An image of {{ project.title }}.">
+
+
+	<div class="card-body">
+
+		<div class="card-title">
+			<h2 class="text-center">{{ project.title }}</h2>
+		</div>
+
+		<div class="card-text">
+			<h5>{{ project.description }}</h5>
+		</div>
+
+	</div><!--END CARD BODY -->
+
+
+	<div class="card-footer border-0">
+
+	<!--KEYWORD TAGS -->
+		<ul class="list-inline">
+			{% for keyword in project.keywords.all %}
+				<li class="list-inline-item">
+					<a href="{{ keyword.get_absolute_url }}" class="badge badge-secondary">{{ keyword }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
+		<a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
+	</div>
+</div><!-- END CARD -->
+{% endfor %}
+<!-- END CARD AREA -->
+</div><!-- END ROW -->
+{% endblock content %}
