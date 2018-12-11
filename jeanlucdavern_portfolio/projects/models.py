@@ -4,12 +4,29 @@ from django.urls import reverse
 from meta.models import ModelMeta
 
 
-class Keywords(models.Model):
+class Keywords(ModelMeta, models.Model):
     class Meta:
         verbose_name_plural = 'keywords'
 
     name = models.CharField(max_length=16, unique=True)
     slug = models.SlugField()
+
+    # Meta attributes
+    title = models.CharField(max_length=60)
+    description = models.CharField(max_length=168)
+    image = models.ImageField(upload_to='keyword_meta_images', default='keyword_meta_images/default.jpg')
+
+    _metadata = {
+        'title': 'title',
+        'description': 'description',
+        'image': 'get_meta_image',
+        'use_twitter': 'True',
+        'url': 'get_absolute_url'
+    }
+
+    def get_meta_image(self):
+        if self.image:
+            return self.image.url
 
     def __str__(self):
         return self.slug

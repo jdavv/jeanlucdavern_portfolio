@@ -2,23 +2,28 @@
 {% load static i18n %}
 {% block content %}
 
-		<div class="contianer-fluid mt-3">
-			{% if meta != None %}
+			{% if meta.description != None %}
+
 			<div class="mt-4 mb-4">
 				<h1>{{ meta.description }}</h1>
 			</div>
 			{% else %}
 			{% endif %}
     {% for project in project_list %}
+
+		<div class="contianer-fluid mt-3">
 		<div class="mt-3">
 			<h2>{{ project.title }}</h2>
 		</div>
+
 			<div>
 				<img src="{{ project.image.url }}" class="img-fluid rounded" alt="An image of {{ project.title }}.">
 			</div>
+
 		<div class="mt-3">
     <p>{{ project.description }}</p>
 		</div>
+
 		<div>
 			<ul class="list-inline">
 			{% for keyword in project.keywords.all %}
@@ -31,7 +36,9 @@
 			<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
 			<a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
 		</div>
+
 		<hr>
+
 		</div>
     {% endfor %}
 {% endblock content %}
