@@ -2,43 +2,57 @@
 {% load static i18n %}
 {% block content %}
 
-			{% if meta.description != None %}
+<!--META DESCRIPTION -->
 
-			<div class="mt-4 mb-4">
-				<h1>{{ meta.description }}</h1>
-			</div>
-			{% else %}
-			{% endif %}
-    {% for project in project_list %}
+{% if meta.description != None %}
+	<div class="row">
+		<div class="col">
+			<h1 class="my-5">{{ meta.description }}</h1>
+		</div>
+	</div>
+{% else %}
+{% endif %}
 
-		<div class="contianer-fluid mt-3">
-		<div class="mt-3">
-			<h2>{{ project.title }}</h2>
+
+<!-- CARD AREA -->
+<div class="row">
+<div class="card-deck">
+
+{% for project in project_list %}
+
+<div class="card border-0">
+	<img src="{{ project.image.url }}" class="card-img-top rounded" alt="An image of {{ project.title }}.">
+
+
+	<div class="card-body">
+
+		<div class="card-title">
+			<h2 class="text-center">{{ project.title }}</h2>
 		</div>
 
-			<div>
-				<img src="{{ project.image.url }}" class="img-fluid rounded" alt="An image of {{ project.title }}.">
-			</div>
-
-		<div class="mt-3">
-    <p>{{ project.description }}</p>
+		<div class="card-text">
+			<h5>{{ project.description }}</h5>
 		</div>
 
-		<div>
-			<ul class="list-inline">
+	</div><!--END CARD BODY -->
+
+
+	<div class="card-footer border-0">
+
+	<!--KEYWORD TAGS -->
+		<ul class="list-inline">
 			{% for keyword in project.keywords.all %}
-			<li class="list-inline-item"><a href="{{ keyword.get_absolute_url }}">{{ keyword }}</a></li>
+				<li class="list-inline-item">
+					<a href="{{ keyword.get_absolute_url }}" class="badge badge-secondary">{{ keyword }}</a>
+				</li>
 			{% endfor %}
-			</ul>
-		</div>
+		</ul>
 
-		<div>
-			<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
-			<a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
-		</div>
-
-		<hr>
-
-		</div>
-    {% endfor %}
+		<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
+		<a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
+	</div>
+</div><!-- END CARD -->
+{% endfor %}
+<!-- END CARD AREA -->
+</div><!-- END ROW -->
 {% endblock content %}
