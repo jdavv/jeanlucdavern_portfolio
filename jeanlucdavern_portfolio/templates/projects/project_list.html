@@ -17,7 +17,6 @@
 <!-- CARD AREA -->
     {% for project in project_list %}
 <div class="row">
-  <div class="col-md-12">
   <div class="card border-0 my-2">
     <img src="{{ project.image.url }}" class="card-img-top rounded" alt="An image of {{ project.title }}.">
       <div class="card-body">
@@ -41,7 +40,6 @@
       </li>
     </ul>
   </div>
-</div>
 </div>
 </div>
 {% endfor %}
