@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<h1>{{ project.title }}</h1>
+<h1 class="my-5">{{ project.title }}</h1>
 
 <img src="{{ project.image.url }}" class="img-fluid" alt="An image of {{ project.title }}.">
 
 <div class="mt-3">
-{{ project.description }}
+  <h5>{{ project.description }}</h5>
 </div>
 
 <div class="mt-3">
 {% for keyword in project.keywords.all %}
-		<a href="{{ keyword.get_absolute_url }}" id="keyword">{{ keyword.name }}</a>
+		<a href="{{ keyword.get_absolute_url }}" class="badge badge-secondary" id="keyword">{{ keyword.name }}</a>
 {% endfor %}
 </div>
 <div class="mt-3">
-<a href="{{ project.repo }}">{{ project.repo }}</a>
+<a href="{{ project.repo }}">View Repo</a>
 </div>
 
-<div class="mt-3">
+<div class="my-3">
 {{ project.text|safe }}
 </div>
 
