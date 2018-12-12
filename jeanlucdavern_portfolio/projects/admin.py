@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import About, SharingMeta, Project, Keywords
+from .models import About, SharingMeta, Project, Keywords, Social
 
 
 class KeywordsAdmin(admin.ModelAdmin):
@@ -22,6 +22,11 @@ class SharingMetaAdmin(admin.ModelAdmin):
     pass
 
 
+class SocialAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Social, SocialAdmin)
 admin.site.register(SharingMeta, SharingMetaAdmin)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Project, ProjectAdmin)

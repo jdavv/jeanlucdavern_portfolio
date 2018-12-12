@@ -103,3 +103,12 @@ class SharingMeta(ModelMeta, models.Model):
     def get_meta_image(self):
         if self.image:
             return self.image.url
+
+
+class Social(models.Model):
+    platform = models.CharField(max_length=60)
+    username = models.CharField(max_length=60)
+    url = models.URLField()
+
+    def __str__(self):
+        return f'{self.platform} : {self.username}'
