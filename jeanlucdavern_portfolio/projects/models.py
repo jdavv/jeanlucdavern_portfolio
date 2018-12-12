@@ -89,12 +89,18 @@ class SharingMeta(ModelMeta, models.Model):
     description = models.CharField(max_length=160)
     display = models.BooleanField(default=False)
     url = models.CharField(max_length=12, unique=True)
+    twitter = models.URLField(max_length=160)
+    linkedin = models.URLField(max_length=160)
+    contact_line = models.TextField()
 
     _metadata = {
        'title': 'title',
        'description': 'description',
        'url': 'url',
        'image': 'get_meta_image',
+       'twitter': 'twitter',
+       'linkedin': 'linkedin',
+       'contact_line': 'contact_line',
     }
 
     def __str__(self):
@@ -103,12 +109,3 @@ class SharingMeta(ModelMeta, models.Model):
     def get_meta_image(self):
         if self.image:
             return self.image.url
-
-
-class Social(models.Model):
-    platform = models.CharField(max_length=60)
-    username = models.CharField(max_length=60)
-    url = models.URLField()
-
-    def __str__(self):
-        return f'{self.platform} : {self.username}'
