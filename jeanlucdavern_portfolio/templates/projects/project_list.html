@@ -15,10 +15,10 @@
 
 
 <!-- CARD AREA -->
-<div class="row my-3">
-  <div class="cotainer">
     {% for project in project_list %}
-  <div class="card border-0 my-3">
+<div class="row">
+  <div class="card-deck">
+  <div class="card border-0 my-2">
     <img src="{{ project.image.url }}" class="card-img-top rounded" alt="An image of {{ project.title }}.">
       <div class="card-body">
         <h2 id="project_title">{{ project.title }}</h2>
@@ -42,7 +42,7 @@
     </ul>
   </div>
 </div>
+  </div>
+  </div>
 {% endfor %}
-  </div>
-  </div>
 {% endblock content %}
