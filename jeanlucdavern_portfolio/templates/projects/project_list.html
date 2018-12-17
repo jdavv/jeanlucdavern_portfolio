@@ -42,5 +42,13 @@
   </div>
 </div>
 </div>
+  <div class="col-md-12 my-3">
+<h3>{{ meta.contact_line|safe }}
+      <a href="{% url 'contact:contact_index' %}">Email</a>
+        <a href="{{ meta.linkedin }}">LinkedIn</a>
+        <a href="{{ meta.github }}">GitHub</a>
+        <a href="{{ meta.twitter }}">Twitter</a>
+</h3>
+</div>
 {% endfor %}
 {% endblock content %}
