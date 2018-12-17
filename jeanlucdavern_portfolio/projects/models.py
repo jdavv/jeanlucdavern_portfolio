@@ -91,6 +91,7 @@ class SharingMeta(ModelMeta, models.Model):
     url = models.CharField(max_length=12, unique=True)
     twitter = models.URLField(max_length=160)
     linkedin = models.URLField(max_length=160)
+    github = models.URLField(max_length=160)
     contact_line = models.TextField()
 
     _metadata = {
@@ -100,6 +101,7 @@ class SharingMeta(ModelMeta, models.Model):
        'image': 'get_meta_image',
        'twitter': 'twitter',
        'linkedin': 'linkedin',
+       'github': 'github',
        'contact_line': 'contact_line',
     }
 
