@@ -12,6 +12,15 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/favicon.ico/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon.ico/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon.ico/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/favicons/favicon.ico/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'images/favicons/favicon.ico/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <link rel="shortcut icon" href="{% static 'images/favicons/favicon.ico/favicon.ico' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="{% static 'images/favicons/favicon.ico/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
     {% block css %}
 
     <!-- Latest compiled and minified Bootstrap 4.1.1 CSS -->
@@ -33,8 +42,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-						<li>
+            </li> <li>
 							<a class="nav-link" href="{% url 'projects:list' %}">Projects</a>
 						</li>
             <li class="nav-item">
