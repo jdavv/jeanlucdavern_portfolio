@@ -3,13 +3,5 @@
 {% block content %}
 <h1 class="my-5">{{ meta.description }}</h1>
 <h5>{{ about.text|safe }}</h5>
-  <div class="col-md-12 my-3">
-<h3>{{ meta.contact_line|safe }}
-      <a href="{% url 'contact:contact_index' %}">Email</a>
-        <a href="{{ meta.linkedin }}">LinkedIn</a>
-        <a href="{{ meta.github }}">GitHub</a>
-        <a href="{{ meta.twitter }}">Twitter</a>
-</h3>
-</div>
 {% endblock content %}
 

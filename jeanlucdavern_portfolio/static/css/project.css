@@ -1,64 +1,31 @@
-/* These styles are generated from project.scss. */
-
-.alert-debug {
-  color: black;
-  background-color: white;
-  border-color: #d6e9c6;
+.footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	min-height: 17em;
+	line-height: 60px; [> Vertically center the text there <]
+	background-color: #159e31;
 }
 
-.alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
+.vertical-centering {
+	display: flex;
+	align-items: center;
 }
 
-.btn-outline-primary,
-.btn-lg {
-  color: black;
-  border-color: black;
+.split {
+	background: #007bff;
+  color: white;
+	height: 10rem;
+	display: flex;
+	align-items: center;
 }
 
-.btn-outline-primary:hover {
-  background-color: #159e31;
-  border-color: #fffae8;
-}
-
-.bg-port-colors {
-  background-color: #159e31;
-  font-color: #f1f0e2;
-}
-
-.card-body {
-  background-color: #d5ffcb;
-}
-
-body {
-  background-color: #efefe7;
-  font-family: 'Roboto', sans-serif;
-}
-
-.jumbotron {
-  background-color: #fffae8;
-}
-
-.jumbotron h1 {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 2em;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  margin-top: 5em;
-  align-self: flex-start;
-}
-
-.carousel-indicators li {
- background-color: #159e31;
- height: .25em;
-}
-
-.carousel-indicators .active {
- background-color: #159e31;
- border-width: 5px;
- height: .45em;
+@media (max-width: 480px) {
+	.split {
+		background: #007bff;
+		color: white;
+		height: 10rem;
+		display: flex;
+		align-items: center;
+		}
 }
