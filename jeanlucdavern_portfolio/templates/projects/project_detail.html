@@ -11,11 +11,11 @@
 
 <div class="mt-3">
 {% for keyword in project.keywords.all %}
-		<a href="{{ keyword.get_absolute_url }}" class="badge badge-secondary" id="keyword">{{ keyword.name }}</a>
+		<a href="{{ keyword.get_absolute_url }}" class="badge badge-secondary" id="keyword">{{ keyword.slug }}</a>
 {% endfor %}
 </div>
 <div class="mt-3">
-<a href="{{ project.repo }}">View Repo</a>
+<a href="{{ project.repo }}" class="btn btn-primary">GitHub</a>
 </div>
 
 <div class="my-3">
