@@ -94,6 +94,7 @@
 
     {% endblock javascript %}
   </body>
+  {% if meta %}
   <footer class="mt-5">
     <div class="container">
         <div class="row justify-content-center">
@@ -114,5 +115,26 @@
             </div>
 
         </div>
+        {% else %}
+  <footer class="mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 text-center split">
+              <h4>Contact me on Social</h4>
+            </div>
+            
+            <div class="col-md-6 vertical-centering text-center">
+              <h4 class="my-3">
+                  <a href="https://www.linkedin.com/in/jean-luc-davern-a698b655/">LinkedIn</a>
+                  <a href="https://github.com/jdavv">GitHub</a>
+                  <a href="https://twitter.com/jdavvadj">Twitter</a>
+              </h4>
+              </div>
+
+            </div>
+
+        </div>
+        {% endif %}
 </footer>
 </html>
