@@ -1,5 +1,5 @@
 ---
-- hosts: staging-portfolio.jeanlucdavern.com
+- hosts: jeanlucdavern.com
   vars:
   user: ubuntu
   become: true
@@ -68,7 +68,7 @@
 
   - name: make {{ domain_name }} available to nginx
     template:
-      src: templates/portfolio-http.j2
+      src: templates/production-portfolio-http.j2
       dest: /etc/nginx/sites-available/{{ domain_name }}
 
   - name: Symlink {{ domain_name }} sites-available to sites-enabled
