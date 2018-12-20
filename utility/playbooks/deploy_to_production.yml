@@ -116,6 +116,3 @@
       name: gunicorn-{{ domain_name }}
       enabled: yes
       state: restarted
-
-  - name: Reboot machine
-    reboot:
