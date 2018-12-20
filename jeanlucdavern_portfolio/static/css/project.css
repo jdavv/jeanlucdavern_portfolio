@@ -7,6 +7,19 @@
 	background-color: #159e31;
 }
 
+.twitter-color {
+fill: #1DA1F2;
+}
+
+.social-icons {
+	width: 25%;
+	float: left;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 2em;
+	padding-bottom: 2em;
+}
+
 .vertical-centering {
 	display: flex;
 	align-items: center;
